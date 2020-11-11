@@ -22,6 +22,7 @@ function table(){
     // Please note: We tried adjusting the style for the table here, but with no luck
     // All style changes including width, height, translate, and more were done within the styles.cc
     // for the table-holder div. That was the only workaround we found with David Saffo during OH
+    // Because it is a HTML table and our limited knowledge, we were unsure how to make the table responsive to screen size changes
     let table = d3.select(selector)
         .append('table')
         

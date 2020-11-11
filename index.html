@@ -6,7 +6,7 @@
   <meta charset='utf-8'>
 
   <!-- Title -->
-  <title>Project Team ##: Topic, DS 4200 F20</title>
+  <title>Project Team 12: Data Within Education, DS 4200 F20</title>
   
   <!-- CSS Styling -->
   <link rel='stylesheet' href='style.css'>
@@ -26,13 +26,13 @@
 <body>
 
   <!-- Update this with your GitHub repo URL -->
-  <span id='forkongithub'><a href='https://github.com/NEU-DS-4200-F20-Staff/Project'>Fork me on GitHub</a></span>
+  <span id='forkongithub'><a href='https://github.com/NEU-DS-4200-F20/project-group-12-data-within-education'>Fork me on GitHub</a></span>
 
   <!-- Writeup -->
   <div class='content-column'>
-   <h1>Project Team ##: Topic, DS4200 F20</h1>
+   <h1>Project Team 12: Data Within Education, DS 4200 F20</h1>
     
-    <p><strong>Student One</strong>, <strong>Student Two</strong>, <strong>Student Three</strong></p>
+    <p><strong>Taeyoon Jin</strong>, <strong>Paul Vicks</strong>, <strong>Haicheng Liu</strong></p>
     
     <p>Service-Learning Course Project as part of
 	<a href='https://canvas.instructure.com/courses/1781732'>DS 4200 F20: Information Visualization</a>, 
@@ -57,18 +57,15 @@
   <div class='vis-holder'>
     <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->    
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
-    <svg id='vis-svg-1'
+    <div class='table-holder' id='table'
+        preserveAspectRatio='xMidYMid meet' class='vis-svg' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  </div>
+    
+    <div class='scatterplot-holder' id='scatterplot'
       preserveAspectRatio='xMidYMid meet' class='vis-svg' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-      
-      
-      <text x='30%' y='35%' text-anchor='middle'>A</text>
-      <text x='70%' y='35%' text-anchor='middle'>B</text>
-      <rect x='20%' y='40%' width='20%' height='20%' fill='yellow'></rect>
-      <circle cx='70%' cy='50%' r='10%' fill='blue'></circle>
-      
-      
-    <!-- Don't delete the closing tag! -->
-    </svg>
+
+    </div>
+    
   </div>
   
   <!-- Further writeup -->
@@ -103,11 +100,18 @@
         Pure CSS responsive 'Fork me on GitHub' ribbon</a>
         by Chris Heilmann is used to create the banner that links back to the source code repository.
       </li>
+      <li><a href = 'https://observablehq.com/@d3/d3v6-migration-guide'>
+      D3 Migration Guide
+      </a>
+      Used to implement D3 Map function for V6
+      </li>
     </ul>
   </div>
   
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src='lib/d3.v6.1.1/d3.min.js'></script>
   <script src='js/visualization.js'></script>
+  <script src='js/visualization_one.js'></script>
+  <script src='js/visualization_two.js'></script>
 </body>
 </html>

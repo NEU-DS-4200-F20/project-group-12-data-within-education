@@ -27,11 +27,11 @@ h1, h2, h3 {
   
   /* The scatterplot will take the right half of the screen */
   .table-holder {
-	height: 750px; /* Set the height here of the table holder div - only workaround we have rn */
+	height: 600px; /* Set the height here of the table holder div - only workaround we have rn */
 	width: 500px; /* Set the width here of the table holder div - only workaround we have rn */
 	overflow: scroll; /* Allow overflowing data to have a scroll */
 	flex: 1; /* Second Flex */
-	transform: translate(0px, 100px); /* Transform translate here, again, only workaround we have rn */
+	transform: translate(0px, 80px); /* Transform translate here, again, only workaround we have rn */
   }
   td, th {
     padding: 1px 4px;

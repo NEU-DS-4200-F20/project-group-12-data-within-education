@@ -15,10 +15,13 @@ function table(){
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
   
-    // Create the chart by adding an svg to the div with the id 
-    // specified by the selector using the given data
+    
     function chart(selector, data) {
     
+
+    // Please note: We tried adjusting the style for the table here, but with no luck
+    // All style changes including width, height, translate, and more were done within the styles.cc
+    // for the table-holder div. That was the only workaround we found with David Saffo during OH
     let table = d3.select(selector)
         .append('table')
         
@@ -55,6 +58,8 @@ function table(){
 
     return chart;
   }
+
+  // Below are the potential changes that could be made using the resuable charts model
 
     chart.margin = function (_) {
       if (!arguments.length) return margin;

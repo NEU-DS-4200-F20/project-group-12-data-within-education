@@ -87,7 +87,7 @@ function scatterplot() {
             if (!statusMap.has(d.Status)) statusMap.set(d.Status, d);  // Add if not already present
             }); //StatusMap contians a map iterator with unique values of d.status and its entire data fields
 
-
+        //https://www.d3-graph-gallery.com/graph/custom_legend.html inspiration for legend
         svg.selectAll("mydots")
             .data(statusMap.values()) //Insert the mapped values which we are concerned with, the status value will be distinct for each data object
             .enter()

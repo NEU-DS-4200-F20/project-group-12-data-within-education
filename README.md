@@ -2,7 +2,7 @@
 
 This repository is your starting point for your project. Please look through all these materials so you know how to organize your project.
 
-Link to your GitHub pages website: [Github Pages Link]https://neu-ds-4200-f20.github.io/project-group-12-data-within-education/
+Link to your GitHub pages website: [Github Pages Link](https://neu-ds-4200-f20.github.io/project-group-12-data-within-education/)
 
 # Aim of the assignment
 

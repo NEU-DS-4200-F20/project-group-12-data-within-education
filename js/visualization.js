@@ -7,31 +7,63 @@
 
     console.log(data)
     data.forEach(d => {
-      d.ID = d.ID;
-      d.Name = d.Name;
-      d.Score = +d.Score;
-      d["Submission TimeStamp"] = d["Submission TimeStamp"];
-      d.Timespent = +d.Timespent;
-      d.Status = d.Status;
-      d.Grade = d.Grade;
-      d.Class = d.Class;
+      d.userId = d.userId;
+      d.assignId = d.assignId;
+      d.submitTime = d.submitTime;
+      d['submitTime intermediate'] = d['submitTime intermediate'];
+      d.timeSpent = + d.timeSpent;
+      d.score = d.score;
+      d.name = d.name;
+      d.classId = d.classId;
+      d.title = d.title;
+      d.dueDate = d.dueDate;
+      d.assignType = d.assignType;
+      d.totalPoints = d.totalPoints;
+      d.className = d.className;
     });
-
+    (async function () {
+      const classData = await d3.json('./data/data.json')
+      const userId = 1
+      const studentClassData = classData.filter(d => d.userId === userId)
+      const groupByClassMap = {}
+      let dates = []
+      studentClassData.forEach(data => {
+          if (!groupByClassMap[data.className]) {
+              groupByClassMap[data.className] = {}
+          }
+  
+          groupByClassMap[data.className][data.dueDate] = (data.score/data.totalPoints) * 100
+          if (!dates.includes(data.dueDate)) {
+              dates.push(data.dueDate)
+          }
+      })
+  
+      const series = Object.keys(groupByClassMap).map(key => {
+          return {
+              name: key,
+              values: dates.map(d => groupByClassMap[key][d])
+          }
+      })
+  
+      dates = dates.map(d => d3.utcParse("%Y-%m-%d")(d))
+      let multiline = multilinechart()
+    ("#multilinechart", {series, dates})
+  })()
   
     
     let scatter = scatterplot()
-    .xLabel("Score")
-    .yLabel('Time Spent (Minutes)')
+    .yLabel("Score")
+    .xLabel('Time Spent (Minutes)')
       ("#scatterplot", data); // Call the scatterplot function on the scatterplot div
 
     let htmltable = table()
       ("#table", data); // Call the table function on the table div
 
+    let histogram = histograms()
+      ("#histogram1", data);
     
-
+      
     
-
-      });
-    
+  });
     })());
     

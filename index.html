@@ -61,13 +61,19 @@
   <div class='vis-holder'>
     <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->    
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
-    <div class='table-holder' id='table'>
-  </div>
+    <div class='table-holder' id='table'></div>
     
     <svg class='scatterplot-holder' id='scatterplot'
       preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
 
-</svg>
+  </svg>
+    <svg class = 'histogram-chart' id='histogram1' height='500' width ='100%' 
+          preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+    </svg>
+    <svg class = 'multi-line' id='multilinechart'
+          preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+    </svg>
+
     
   </div>
   
@@ -119,7 +125,10 @@
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src='lib/d3.v6.1.1/d3.min.js'></script>
   <script src='js/visualization.js'></script>
-  <script src='js/visualization_one.js'></script>
-  <script src='js/visualization_two.js'></script>
+  <script src='js/table.js'></script>
+  <script src='js/scatterdist.js'></script>
+  <script src='js/histograms.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.13.0/d3-legend.js"></script>
+  <script src='js/multilinechart.js'></script>
 </body>
 </html>

@@ -58,13 +58,13 @@ function chart(selector, data) {
         .attr("y", 0 + (width/2))
         .attr("text-anchor", "middle")  
         .style("font-size", "15px") 
-        .text("Student Grades");    
+        .text("Student X Grades");    
     svg.append("text") //Title Text
         .attr("x", (width/2))             
         .attr("y", 0 + (margin.top/2))
         .attr("text-anchor", "middle")  
         .style("font-size", "15px") 
-        .text("Student Grades Over Time"); 
+        .text("Grades Recieved By A Student"); 
 
     svg.append("g")
         .call(xAxis);

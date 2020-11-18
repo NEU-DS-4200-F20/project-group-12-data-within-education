@@ -28,7 +28,7 @@ function chart(selector, data) {
         .range(['rgb(234,118,47)', 'rgb(56,106,197)'])
 
     const legend = d3.legendColor()
-        .shapeWidth(20)
+        .shapeWidth(10)
         // .orient('horizontal')
         .scale(colorsScale)
 
@@ -53,13 +53,18 @@ function chart(selector, data) {
         .style("overflow", "visible")
         .attr('viewBox', [0, 0, (width + margin.left + margin.right), height * 2].join(' '))
         
-    svg.append("text")
-        .attr("x", -(margin.left))             
+    svg.append("text") //XAxis text
+        .attr("x", (-(margin.left)))             
         .attr("y", 0 + (width/2))
         .attr("text-anchor", "middle")  
-        .style("font-size", "20px") 
+        .style("font-size", "15px") 
         .text("Student Grades");    
-
+    svg.append("text") //Title Text
+        .attr("x", (width/2))             
+        .attr("y", 0 + (margin.top/2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "15px") 
+        .text("Student Grades Over Time"); 
 
     svg.append("g")
         .call(xAxis);
@@ -68,6 +73,7 @@ function chart(selector, data) {
         .call(yAxis);
 
     svg.append("g")
+        .attr("transform", "translate(" + width + ',' + height/2 + ")")
         .call(legend);
 
     const path = svg.append("g")
@@ -84,6 +90,24 @@ function chart(selector, data) {
     
     return chart;
 }
+chart.margin = function (_) {
+    if (!arguments.length) return margin;
+    margin = _;
+    return chart;
+  };
+
+  chart.width = function (_) {
+    if (!arguments.length) return width;
+    width = _;
+    return chart;
+  };
+
+  chart.height = function (_) {
+    if (!arguments.length) return height;
+    height = _;
+    return chart;
+  };
+
 
 return chart;
 };

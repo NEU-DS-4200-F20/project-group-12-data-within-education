@@ -35,7 +35,7 @@ function histograms() {
           .attr("x", (width / 2 + margin.right + margin.left))             
           .attr("y", 0 + (margin.top/2))
           .attr("text-anchor", "middle")  
-          .style("font-size", "30px") 
+          .style("font-size", "15px") 
           .text("Reference Distribution Plots");
 
         let firstG = svg.append('g') //Need to add two group elements, one for each histogram

@@ -7,19 +7,18 @@
 
     console.log(data)
     data.forEach(d => {
-      d.userId = d.userId;
-      d.assignId = d.assignId;
-      d.submitTime = d.submitTime;
-      d['submitTime intermediate'] = d['submitTime intermediate'];
-      d.timeSpent = + d.timeSpent;
-      d.score = d.score;
-      d.name = d.name;
-      d.classId = d.classId;
-      d.title = d.title;
-      d.dueDate = d.dueDate;
-      d.assignType = d.assignType;
-      d.totalPoints = d.totalPoints;
-      d.className = d.className;
+        d.classId = d.classId;
+        d.className = d.className;
+        d.userId = d.userId;
+        d.assignId = d.assignId;
+        d.submitTime = d.submitTime;
+        d.score = d.score;
+        d.timespent = + d.timespent;
+        d.title = d.title;
+        d.dueDate = d.dueDate;
+        d.assignType = d.assignType;
+        d.totalPoints = d.totalPoints;
+        d.name = d.name;
     });
     (async function () {
       const classData = await d3.json('./data/data.json')

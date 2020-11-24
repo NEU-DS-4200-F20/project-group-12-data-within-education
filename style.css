@@ -50,7 +50,16 @@ h1, h2, h3 {
 .legend{
 	border:1px solid black;
 }
+circle.selected {
+	background-color: yellow;
+	fill: pink;
+	stroke: black;
+	opacity: 1;
+  }
 
+  tr.selected {
+	background-color: pink;
+  }
 
 
 /* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */  

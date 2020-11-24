@@ -11,15 +11,18 @@ function scatterplot() {
         right: 30,
         bottom: 40
       },
-      width = 500 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom,
+      width = 400 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom,
       xValue = data => data.timespent,
       yValue = data => (data.score/ data.totalPoints) * 100,
       xLabelText = '',
       yLabelText = '',
       yLabelOffsetPx = 0,
       xScale = d3.scaleLinear(),
-      yScale = d3.scaleLinear()
+      yScale = d3.scaleLinear(),
+      ourBrush = null,
+      selectableElements = d3.select(null),
+      dispatcher;
 
     
     // Below are the basic D3 principles applied to make a scatterplot
@@ -32,15 +35,15 @@ function scatterplot() {
     let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [0, 0, width + margin.left + margin.right, height *3].join(' '))
+          .attr('viewBox', [0, 0, width + margin.left + margin.right, height*2.5].join(' '))
         
 
     //Title Text
       svg.append("text")
           .attr("x", (width / 2 + margin.right + margin.left))             
-          .attr("y", 0 + (height/2))
+          .attr("y", 0 + (height - margin.top - margin.bottom))
           .attr("text-anchor", "middle")  
-          .style("font-size", "20px") 
+          .style("font-size", "30px") 
           .text("Grades by Time Spent"); 
     // Transition Text
     svg.append("text")
@@ -51,7 +54,7 @@ function scatterplot() {
           .text("Below are the reference distributions from the chart above");
     
     svg = svg.append('g')
-          .attr('transform', 'translate(' + margin.left + ',' + (height + margin.top + margin.bottom) + ')');
+          .attr('transform', 'translate(' + width/3 + ',' + (height) + ')');
     
 
     let legend = svg.append('g') 
@@ -110,16 +113,24 @@ function scatterplot() {
 
           var colorScale = d3.scaleOrdinal(d3.schemeCategory10)
           .domain(data.map(function (d){ return d.className; })); //ColorScheme set up based on class name
+          
+        let points = svg.append('g')
+          .selectAll('.scatterPoint')
+            .data(data);
+
+        points.exit().remove();
 
 
-        svg.selectAll('circle').data(data)
+
+
+        points = points
             .enter().append('circle')
               .attr('cy', d => yScale(yValue(d))) //Scale the y datapoint 
               .attr('cx', d => xScale(xValue(d))) //Scale the x datapoint
               .attr('r', 4)
-              .style("fill", function(d) { //Color logic for the scatterplot points
+              .style("stroke", function(d) { //Color logic for the scatterplot points
                 return colorScale(d.className)
-                });
+                })
 
     
     
@@ -136,7 +147,7 @@ function scatterplot() {
               .attr("cx", margin.left - 30)
               .attr("cy", function(d,i){ return i*25}) // 100 is where the first dot appears. 25 is the distance between dots
               .attr("r", 5)
-              .style("fill", function(d) {
+              .style("stroke", function(d) {
                 return colorScale(d.className)
                 });
                 
@@ -153,6 +164,53 @@ function scatterplot() {
             console.log(d)
               return colorScale(d.className)
             })
+            
+
+    selectableElements = points;
+    
+    svg.call(brush);
+
+    // Highlight points when brushed
+    function brush(g) {
+      const brush = d3.brush() // Create a 2D interactive brush
+        .on('start brush', highlight) // When the brush starts/continues do...
+        .on('end', brushEnd) // When the brush ends do...
+        .extent([
+          [-margin.left, -margin.bottom],
+          [width + margin.right, height + margin.top]
+        ]);
+        
+      ourBrush = brush;
+
+      g.call(brush); // Adds the brush to this element
+
+      // Highlight the selected circles
+      function highlight(event, d) {
+        if (event.selection === null) return;
+        const [
+          [x0, y0],
+          [x1, y1]
+        ] = event.selection;
+
+        // If within the bounds of the brush, select it
+        points.classed('selected', d =>
+          x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
+        )
+
+        // Get the name of our dispatcher's event
+        let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+        // Let other charts know about our selection
+        console.log(svg.selectAll('.selected'))
+        dispatcher.call(dispatchString, this, svg.selectAll('.selected').data());
+      }
+      
+      function brushEnd(event, d){
+        // We don't want infinite recursion
+        if(event.sourceEvent !== undefined && event.sourceEvent.type!='end'){
+          d3.select(this).call(brush.move, null);
+        }
+      }
+    }
 
       return chart;
     }
@@ -161,6 +219,15 @@ function scatterplot() {
     // Below are the changeable chart elements based on the resuable model
     // Not all are being called on currently
     // The x-accessor from the datum
+
+    function X(d) {
+      return xScale(xValue(d));
+    }
+  
+    // The y-accessor from the datum
+    function Y(d) {
+      return yScale(yValue(d));
+    }
   
     chart.margin = function (_) {
       if (!arguments.length) return margin;
@@ -208,6 +275,24 @@ function scatterplot() {
       if (!arguments.length) return yLabelOffsetPx;
       yLabelOffsetPx = _;
       return chart;
+    };
+
+    chart.selectionDispatcher = function (_) {
+      if (!arguments.length) return dispatcher;
+      dispatcher = _;
+      return chart;
+    };
+  
+    // Given selected data from another visualization 
+    // select the relevant elements here (linking)
+    chart.updateSelection = function (selectedData) {
+      if (!arguments.length) return;
+  
+      // Select an element if its datum was selected
+      selectableElements.classed('selected', d =>
+        selectedData.includes(d)
+      );
+  
     };
   
     return chart;

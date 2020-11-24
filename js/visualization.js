@@ -105,19 +105,29 @@
     })()
 
 
+    
+    const dispatchString = 'selectionUpdated';
+
+    
     let scatter = scatterplot()
-      .yLabel("Score")
-      .xLabel('Time Spent (Minutes)')
+    .yLabel("Score")
+    .selectionDispatcher(d3.dispatch(dispatchString))
+    .xLabel('Time Spent (Minutes)')
       ("#scatterplot", data); // Call the scatterplot function on the scatterplot div
 
     let htmltable = table()
+    .selectionDispatcher(d3.dispatch(dispatchString))
       ("#table", data); // Call the table function on the table div
 
     let histogram = histograms()
       ("#histogram1", data);
 
-
-
+      scatter.selectionDispatcher().on(dispatchString, function(selectedData) {
+        htmltable.updateSelection(selectedData)
+      });
+    
+      
+    
   });
-})());
-
+    })());
+    

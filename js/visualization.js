@@ -11,7 +11,7 @@
       d.assignId = d.assignId;
       d.submitTime = d.submitTime;
       d['submitTime intermediate'] = d['submitTime intermediate'];
-      d.timeSpent = + d.timeSpent;
+      d.timespent = + d.timespent;
       d.score = d.score;
       d.name = d.name;
       d.classId = d.classId;
@@ -56,7 +56,7 @@
         })
         console.log('dates', dates, series)
 
-        dates = dates.map(d => d3.utcParse("%Y-%m-%d")(d))
+        dates = dates.map(d => d3.utcParse("%m-%d-%Y")(d))
         return { series, dates, name: students[userId], studentClassData }
       }
 

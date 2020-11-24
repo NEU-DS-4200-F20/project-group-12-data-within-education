@@ -13,7 +13,7 @@ function scatterplot() {
       },
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom,
-      xValue = data => data.timespent,
+      xValue = data => data.timeSpent,
       yValue = data => (data.score/ data.totalPoints) * 100,
       xLabelText = '',
       yLabelText = '',

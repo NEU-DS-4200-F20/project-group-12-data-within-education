@@ -9,7 +9,7 @@ function histograms() {
       },
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom,
-      xValue = data => data.timespent,
+      xValue = data => data.timeSpent,
       yValue = data => (data.score/ data.totalPoints) * 100,
       xLabelText = '',
       yLabelText = '',
@@ -55,7 +55,7 @@ function histograms() {
 
           
         var firstHistogram = d3.bin()
-          .value(function(d) { return d.timespent }) //Here we bin the timespent values
+          .value(function(d) { return d.timeSpent }) //Here we bin the timespent values
           .domain(xScaleFirst.domain())
 
         var secondHistogram = d3.bin()

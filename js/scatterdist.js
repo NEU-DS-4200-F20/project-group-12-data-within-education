@@ -39,11 +39,11 @@ function scatterplot() {
 
         //Title Text
         svg.append("text")
-            .attr("x", (500 / 2))
+            .attr("x", (450 / 2))
             .attr("y", -30)
             .attr("text-anchor", "middle")
             .style("font-size", "21px")
-            .text("Grades by Time Spent");
+            .text("Quiz Grades by Time Spent");
 
         svg = svg.append('g')
             .attr('transform', 'translate(' + 0 + ',' + 0 + ')');

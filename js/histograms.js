@@ -186,10 +186,21 @@ function histograms() {
 
         var y2 = d3.scaleLinear()
             .range([height, 0]);
-            y2.domain([0, d3.max(bins2, function(d) { return d.length; })]); 
+            y2.domain([0, d3.max(bins2, function(d) { return d.length; })]);
 
-        sixthG.append("g")
-            .call(d3.axisLeft(y2)); //Call the second scaled yAxis and build it
+        let yAxis2 = sixthG.append("g")
+            .call(d3.axisLeft(y2)); //Call the scaled yAxis and build it
+        yAxis2.append('text') //Only using one y axis label for both charts
+            .attr('class', 'axisLabel')
+            .attr('y', -25)
+            .attr('fill', 'black') 
+            .attr('x', -height/2)
+            .attr('transform', `rotate(-90)`)
+            .attr('text-anchor', 'middle')
+            .style("font-size", "15px") 
+            .text("Frequency");
+
+    
         seventhG.append("g")
             .call(d3.axisLeft(y2)); //Call the second scaled yAxis and build it
         eigthG.append("g")

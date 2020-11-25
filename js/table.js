@@ -18,6 +18,7 @@ function table(){
 
 
   function chart(selector, data) {
+    data = data.filter(function(d){return d.assignType === "quiz" || d.assignType === "offline-quiz"} )
 
 
     // Please note: We tried adjusting the style for the table here, but with no luck

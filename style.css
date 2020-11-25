@@ -34,6 +34,10 @@ h1, h2, h3 {
 	  display: flex;
   }
 
+  .histogram-chart{
+      margin-bottom: -30%;
+  }
+
   
   
   /* The scatterplot will take the right half of the screen */

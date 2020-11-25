@@ -31,18 +31,34 @@
       const { studentClassData, ...multilineChartData } = getChartDataByUserId(userId)
       let multiline = multilinechart()("#multilinechart", multilineChartData)
       let multilinetable = table()("#multilinetable", studentClassData);
+
+      // Might be broken
       function getChartDataByUserId(userId) {
         const studentClassData = classData.filter(d => d.userId == userId)
         const groupByClassMap = {}
         let dates = []
+        let accumScore = 0;
+        let counter = 0;
+        let prevClass = '';
         studentClassData.forEach(data => {
           if (!groupByClassMap[data.className]) {
             groupByClassMap[data.className] = {}
           }
 
-          groupByClassMap[data.className][data.dueDate] = (data.score / data.totalPoints) * 100
+          if (prevClass != '' && prevClass != data.className){
+            accumScore = 0;
+            counter = 0;
+          }
+
+          prevClass = data.className;
+
+          accumScore = accumScore + (data.score / data.totalPoints) * 100;
+          counter++;
+          // console.log(accumScore/counter);
+          groupByClassMap[data.className][data.dueDate] = accumScore / counter;
+
           if (!dates.includes(data.dueDate)) {
-            dates.push(data.dueDate)
+            dates.push(data.dueDate);
           }
         })
         dates = dates.sort((a, b) => new Date(a).getTime() - new Date(b).getTime())

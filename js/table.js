@@ -71,14 +71,12 @@ function table(){
       //Create table features
       // https://bost.ocks.org/mike/chart/ ideas from here
 
-      var columns = Object.keys(data[0]) // the data keys of the json
-
       let thead = table.append('thead') //start off table head
       let tbody = table.append('tbody') //start off table body
 
       var header = thead.append("tr")
           .selectAll("th")
-          .data(columns) //place the columns data as the table header
+          .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Time submitted", "Due Date"])
           .enter()
           .append("th")
           .text(function (data) { return data; })

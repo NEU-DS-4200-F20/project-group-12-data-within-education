@@ -71,7 +71,7 @@
         })
         console.log('dates', dates, series)
 
-        dates = dates.map(d => d3.utcParse("%m-%d-%Y")(d))
+        dates = dates.map(d => d3.utcParse("%m-%d-%y")(d))
         return { series, dates, name: students[userId], studentClassData }
       }
 

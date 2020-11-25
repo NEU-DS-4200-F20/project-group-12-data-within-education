@@ -131,7 +131,7 @@
 
     let htmltable = table()
         .selectionDispatcher(d3.dispatch(dispatchString))
-        ("#table", data); // Call the table function on the table div
+        ("#table", data.filter(function(d){return d.assignType === "quiz" || d.assignType === "offline-quiz"} )); // Call the table function on the table div
 
     let histogram = histograms()
     ("#histogram1", data);

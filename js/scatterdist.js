@@ -57,7 +57,7 @@ function scatterplot() {
           .attr('transform', 'translate(' + width/3 + ',' + (height) + ')');
     
 
-    let legend = svg.append('g') 
+    let legend = svg.append('g')
           .attr('transform', 'translate(' + -width/1.1 + ',' + ((height - margin.bottom- margin.top)/2) + ')');
     
     //Setting up the sidescaling distributions
@@ -69,8 +69,6 @@ function scatterplot() {
     let seconddist = svg.append('g') 
     .attr('transform', 'translate(' + (width+height + margin.right) + ',' + 0 + ')' +  'rotate(90)')
           .attr('class', 'gRotate')
-    
-
   
         xScale
           .domain(d3.extent(data, xValue)) // Use extent to get the min, max
@@ -107,9 +105,6 @@ function scatterplot() {
             .attr('text-anchor', 'middle')
             .style("font-size", "15px") 
             .text(yLabelText);//yLabelText is applied in the main visualization.js file
-    
-
-      
 
           var colorScale = d3.scaleOrdinal(d3.schemeCategory10)
           .domain(data.map(function (d){ return d.className; })); //ColorScheme set up based on class name
@@ -120,9 +115,6 @@ function scatterplot() {
 
         points.exit().remove();
 
-
-
-
         points = points
             .enter().append('circle')
               .attr('cy', d => yScale(yValue(d))) //Scale the y datapoint 
@@ -131,7 +123,6 @@ function scatterplot() {
               .style("stroke", function(d) { //Color logic for the scatterplot points
                 return colorScale(d.className)
                 })
-
     
     
         let statusMap = new Map();   // https://observablehq.com/@d3/d3v6-migration-guide

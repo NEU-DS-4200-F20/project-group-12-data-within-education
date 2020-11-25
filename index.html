@@ -27,141 +27,147 @@
 
 <body>
 
-  <!-- Update this with your GitHub repo URL -->
-  <span id='forkongithub'><a href='https://github.com/NEU-DS-4200-F20/project-group-12-data-within-education'>Fork me on
+<!-- Update this with your GitHub repo URL -->
+<span id='forkongithub'><a href='https://github.com/NEU-DS-4200-F20/project-group-12-data-within-education'>Fork me on
       GitHub</a></span>
 
-  <!-- Writeup -->
-  <div class='content-column'>
-    <h1>Project Team 12: Data Within Education, DS 4200 F20</h1>
+<!-- Writeup -->
+<div class='content-column'>
+  <h1>Project Team 12: Data Within Education, DS 4200 F20</h1>
 
-    <p><strong>Taeyoon Jin</strong>, <strong>Paul Vicks</strong>, <strong>Haicheng Liu</strong></p>
+  <p><strong>Taeyoon Jin</strong>, <strong>Paul Vicks</strong>, <strong>Haicheng Liu</strong></p>
 
-    <p>Service-Learning Course Project as part of
-      <a href='https://canvas.instructure.com/courses/1781732'>DS 4200 F20: Information Visualization</a>,
-      taught by <a href='https://cody.khoury.northeastern.edu/'>Prof. Cody Dunne</a>,
-      <a href='https://visualization.khoury.northeastern.edu/'>Data Visualization @ Khoury</a>,
-      <a href='https://www.khoury.northeastern.edu/'>Northeastern University</a>.</p>
-
-
-    <h1>Abstract</h1>
-
-    <p>Replace with your paper abstract.</p>
+  <p>Service-Learning Course Project as part of
+    <a href='https://canvas.instructure.com/courses/1781732'>DS 4200 F20: Information Visualization</a>,
+    taught by <a href='https://cody.khoury.northeastern.edu/'>Prof. Cody Dunne</a>,
+    <a href='https://visualization.khoury.northeastern.edu/'>Data Visualization @ Khoury</a>,
+    <a href='https://www.khoury.northeastern.edu/'>Northeastern University</a>.</p>
 
 
-    <h1>Visualization</h1>
+  <h1>Abstract</h1>
 
-    <p>Include the interactive visualization as part of this page. Static example follows.</p>
-
-
-  </div>
+  <p>Replace with your paper abstract.</p>
 
 
+  <h1>Visualization</h1>
 
-  <!-- Visualization goes here -->
-  <div class='vis-holder'>
-    <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
-    <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
-    <div class='table-holder' id='table'></div>
-    
-    <svg class='scatterplot-holder' id='scatterplot' 
-      preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  <p>Include the interactive visualization as part of this page. Static example follows.</p>
 
-  </svg>
-    <svg class = 'histogram-chart' id='histogram1' 
-          preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-    </svg>
-    </svg>
-    &nbsp;&nbsp;
 
-    <div>
-      <div class="dropdown">
-        <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          class="dropdown-button" onclick="onClickButton(event)">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dLabel">
-          <!-- <li class="active">Action</li>
-          <li>Another action</li>
-          <li>Something else here</li>
-          <li>Separated link</li> -->
-        </ul>
+</div>
+
+
+
+<!-- Visualization goes here -->
+<div class='vis-holder'>
+  <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
+  <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
+<!--
+  <div class='table-holder' id='table'></div>
+-->
+
+
+  <div>
+    <div style="display: flex">
+      <div style="flex: 1 auto; width: 70%; box-sizing: border-box;">
+        <div class="table-holder" id='table' style="max-height: 500px;"></div>
       </div>
-      <div style="display: flex">
-        <div style="flex: 1 auto;width: 50%;padding: 20px;box-sizing: border-box;">
-          <div id="multilinetable" style="overflow: auto;width: 100%;max-height: 400px;"></div>
-        </div>
-        <div id="multilinechart" style="flex: 1 1 auto;width: 50%;padding: 20px;box-sizing: border-box;"></div>
-      </div>
-      <!-- <svg class='multi-line' id='multilinechart' preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000'
-        version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-      </svg> -->
+      <div style="flex: 1 1 auto; width: 30%; box-sizing: border-box;">
+        <svg class='scatterplot-holder' id='scatterplot'
+             preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+        </svg>
+      </div>sdsdsds
     </div>
-
-
-
   </div>
 
-  <!-- Further writeup -->
-  <div class='content-column'>
+  <svg class = 'histogram-chart' id='histogram1'
+       preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+  </svg>
 
-    <h1>Demo Video</h1>
+  &nbsp;&nbsp;
 
-    <p>Embed an MP4 demo video using the HTML5 &lt;video&gt; tag. For example, this screen recording Prof. Cody Dunne
-      made of Mike Bostock's flexible transitions in D3 slide:</p>
-
-    <video controls width='100%'>
-      <source src='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4' type='video/mp4'>
-      <p>Your browser doesn't support HTML5 video. Here is
-        a <a href='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4'>link to the video</a>
-        instead.</p>
-    </video>
-
-    <h1>Visualization explanation</h1>
-
-    <p>Replace with a brief explanation (can be copied from the paper) and linked presentation slides.</p>
-
-    <h1>Acknowledgments</h1>
-
-    <p>
-      List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.
-    </p>
-
-    <ul>
-      <li><a href='https://d3js.org/'>
-          D3: Data-Driven Documents</a>
-        by Mike Bostock is used for manipulating the DOM to create visualizations.
-      </li>
-      <li><a href='https://codepo8.github.io/css-fork-on-github-ribbon/#'>
-          Pure CSS responsive 'Fork me on GitHub' ribbon</a>
-        by Chris Heilmann is used to create the banner that links back to the source code repository.
-      </li>
-      <li><a href='https://observablehq.com/@d3/d3v6-migration-guide'>
-          D3 Migration Guide
-        </a>
-        Used to implement D3 Map function for V6
-      </li>
-      <li><a href="https://www.d3-graph-gallery.com/graph/custom_legend.html">
-          Legend Guide
-        </a>
-        Inspiration for our Scatterplot Legend
-      </li>
-      <li><a href="https://www.d3-graph-gallery.com/graph/histogram_basic.html">
-          Histogram Guide
-        </a>
-        Inspiration for our Histograms
-      </li>
-    </ul>
+  <div>
+    <div style="display: flex">
+      <div style="flex: 1 auto; width: 70%; box-sizing: border-box;">
+        <div class="table-holder" id="multilinetable" style="max-height: 500px;"></div>
+      </div>
+      <div id="multilinechart" style="flex: 1 1 auto; width: 30%; box-sizing: border-box;">
+        <div class="dropdown">
+          <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                  class="dropdown-button" onclick="onClickButton(event)">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dLabel">
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
-  <script src='lib/d3.v6.1.1/d3.min.js'></script>
-  <script src='js/table.js'></script>
-  <script src='js/scatterdist.js'></script>
-  <script src='js/histograms.js'></script>
-  <script src='lib/d3-legend.min.js'></script>
-  <script src='js/multilinechart.js'></script>
-  <script src='js/visualization.js'></script>
+
+
+</div>
+
+<!-- Further writeup -->
+<div class='content-column'>
+
+  <h1>Demo Video</h1>
+
+  <p>Embed an MP4 demo video using the HTML5 &lt;video&gt; tag. For example, this screen recording Prof. Cody Dunne
+    made of Mike Bostock's flexible transitions in D3 slide:</p>
+
+  <video controls width='100%'>
+    <source src='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4' type='video/mp4'>
+    <p>Your browser doesn't support HTML5 video. Here is
+      a <a href='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4'>link to the video</a>
+      instead.</p>
+  </video>
+
+  <h1>Visualization explanation</h1>
+
+  <p>Replace with a brief explanation (can be copied from the paper) and linked presentation slides.</p>
+
+  <h1>Acknowledgments</h1>
+
+  <p>
+    List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.
+  </p>
+
+  <ul>
+    <li><a href='https://d3js.org/'>
+      D3: Data-Driven Documents</a>
+      by Mike Bostock is used for manipulating the DOM to create visualizations.
+    </li>
+    <li><a href='https://codepo8.github.io/css-fork-on-github-ribbon/#'>
+      Pure CSS responsive 'Fork me on GitHub' ribbon</a>
+      by Chris Heilmann is used to create the banner that links back to the source code repository.
+    </li>
+    <li><a href='https://observablehq.com/@d3/d3v6-migration-guide'>
+      D3 Migration Guide
+    </a>
+      Used to implement D3 Map function for V6
+    </li>
+    <li><a href="https://www.d3-graph-gallery.com/graph/custom_legend.html">
+      Legend Guide
+    </a>
+      Inspiration for our Scatterplot Legend
+    </li>
+    <li><a href="https://www.d3-graph-gallery.com/graph/histogram_basic.html">
+      Histogram Guide
+    </a>
+      Inspiration for our Histograms
+    </li>
+  </ul>
+</div>
+
+<!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
+<script src='lib/d3.v6.1.1/d3.min.js'></script>
+<script src='js/table.js'></script>
+<script src='js/scatterdist.js'></script>
+<script src='js/histograms.js'></script>
+<script src='lib/d3-legend.min.js'></script>
+<script src='js/multilinechart.js'></script>
+<script src='js/visualization.js'></script>
 </body>
 
 </html>

@@ -30,14 +30,16 @@ function table(){
     //Create table features
     // https://bost.ocks.org/mike/chart/ ideas from here
 
-    var columns = Object.keys(data[0]) // the data keys of the json
+    var columns = ["name", "className", "title", "score", "totalPoints", "submitTime", "dueDate"] // the data keys of the json
+
+    console.log(Object.keys(data[0]));
 
     let thead = table.append('thead') //start off table head
     let tbody = table.append('tbody') //start off table body
 
     var header = thead.append("tr")
         .selectAll("th")
-        .data(columns) //place the columns data as the table header
+        .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Time submitted", "Due Date"]) //place the columns data as the table header
         .enter()
         .append("th")
         .text(function(data){return data;})

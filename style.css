@@ -1,188 +1,228 @@
 /* General formatting */
 body {
-	padding: 0 10px;
-	font: 18px/1.5 -apple-system, BlinkMacSystemFont, "avenir next",avenir, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans",roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", "Liberation Sans",
-	sans-serif;
+    padding: 0 50px;
+    font: 18px/1.5 -apple-system, BlinkMacSystemFont, "avenir next",avenir, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans",roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", "Liberation Sans",
+    sans-serif;
 }
 
 h1, h2, h3 {
-	line-height: 1.2
+    line-height: 1.2
 }
 
 /* Your text should be in a nice narrow column */
 .content-column {
-	max-width: 650px;
-	margin: 40px auto;
+    max-width: 650px;
+    margin: 40px auto;
 }
 
 /* But your visualization should be full-width and full-height */
 .vis-holder {
-	width: 100%;
-	height: 100%;
-  }
+    width: 100%;
+    height: 100%;
+}
 
-  .scatterplot-holder {
-	display: flex;
-	overflow: visible;
-	flex: 0 0 50%; /* First Flex, set to 50% for side by side */
-  }
-  .scatterplot{
-	  display: flex;
-  }
+.scatterplot-holder {
+    display: flex;
+    overflow: visible;
+    flex: 0 0 50%; /* First Flex, set to 50% for side by side */
+}
+.scatterplot{
+    display: flex;
+}
 
-  .histogram-holder{
-	  display: flex;
-  }
+.histogram-holder{
+    display: flex;
+}
 
-  .histogram-chart{
-      margin-bottom: -30%;
-  }
+.histogram-chart{
+    margin-bottom: -30%;
+}
 
-  
-  
-  /* The scatterplot will take the right half of the screen */
-  .table-holder {
-	height: 600px; /* Set the height here of the table holder div - only workaround we have rn */
-	overflow: scroll; /* Allow overflowing data to have a scroll */
-	transform: translate(0px, 0px); /* Transform translate here, again, only workaround we have rn */
-  }
-  td, th {
-    padding: 1px 4px;
-	border: 1px black solid; /* Css for table borders within td and th */
+.table-holder {
+    cursor: crosshair;
+    overflow-y: auto;
+    height: 600px;
+    text-align: center;
+}
+
+.table-holder thead th {
+    position: sticky;
+    top: 0;
+}
+
+/* Style for selected marks (table rows) */
+tr.selected {
+    background-color: pink;
+}
+
+/* Pretty table layout */
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+    width: 100%;
+}
+
+th {
+    background: #eee;
+}
+
+th, td {
+    /* vertical | horizontal */
+    padding: 0 8px;
+}
+
+/* Don't also do text drag selection */
+table.text-unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+/* Recreate the D3 brush style... */
+tr.mouseover {
+    background-color: #d6d6d6;
+}
+
+/* ...but add a darker selected and brushed color. */
+tr.mouseover.selected{
+    background-color: #e08fa3;
 }
 
 .legend{
-	border:1px solid black;
+    border:1px solid #000000;
 }
+
 circle.selected {
-	background-color: yellow;
-	fill: pink;
-	stroke: black;
-	opacity: 1;
-  }
+    background-color: yellow;
+    fill: pink;
+    stroke: black;
+    opacity: 1;
+}
 
-  tr.selected {
-	background-color: pink;
-  }
-
-
-/* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */  
+/* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */
 #forkongithub a{
-	background:#00F;
-	color:#fff;
-	text-decoration:none;
-	font-family:arial,sans-serif;
-	text-align:center;
-	font-weight:bold;
-	padding:5px 40px;
-	font-size:1rem;
-	line-height:1.4rem;
-	position:relative;
-	transition:0.5s;
+    background:#00F;
+    color:#fff;
+    text-decoration:none;
+    font-family:arial,sans-serif;
+    text-align:center;
+    font-weight:bold;
+    padding:5px 40px;
+    font-size:1rem;
+    line-height:1.4rem;
+    position:relative;
+    transition:0.5s;
 }
 #forkongithub a:hover{
-	background:#118;
-	color:#fff;
+    background:#118;
+    color:#fff;
 }
 #forkongithub a::before,#forkongithub a::after{
-	content:"";
-	width:100%;
-	display:block;
-	position:absolute;
-	top:1px;
-	left:0;
-	height:1px;
-	background:#fff;
+    content:"";
+    width:100%;
+    display:block;
+    position:absolute;
+    top:1px;
+    left:0;
+    height:1px;
+    background:#fff;
 }
 #forkongithub a::after{
-	bottom:1px;
-	top:auto;
+    bottom:1px;
+    top:auto;
 }
 @media screen and (min-width:1000px){
-	#forkongithub{
-		position:absolute;
-		display:block;
-		top:0;
-		right:0;
-		width:200px;
-		overflow:hidden;
-		height:200px;
-		z-index:9999;
-	}
-	#forkongithub a{
-		width:200px;
-		position:absolute;
-		top:60px;
-		right:-60px;
-		transform:rotate(45deg);
-		-webkit-transform:rotate(45deg);
-		-ms-transform:rotate(45deg);
-		-moz-transform:rotate(45deg);
-		-o-transform:rotate(45deg);
-		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
-	}
+    #forkongithub{
+        position:absolute;
+        display:block;
+        top:0;
+        right:0;
+        width:200px;
+        overflow:hidden;
+        height:200px;
+        z-index:9999;
+    }
+    #forkongithub a{
+        width:200px;
+        position:absolute;
+        top:60px;
+        right:-60px;
+        transform:rotate(45deg);
+        -webkit-transform:rotate(45deg);
+        -ms-transform:rotate(45deg);
+        -moz-transform:rotate(45deg);
+        -o-transform:rotate(45deg);
+        box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+    }
 }
 
 
-      .dropdown {
-        position: relative;
-      }
-      .dropdown-button {
-        cursor: pointer;
-      }
-      .caret {
-        display: inline-block;
-        width: 0;
-        height: 0;
-        margin-left: 2px;
-        vertical-align: middle;
-        border-top: 4px dashed;
-        border-right: 4px solid transparent;
-        border-left: 4px solid transparent;
-      }
+.dropdown {
+    position: relative;
+}
 
-      .dropdown-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        z-index: 1000;
-        display: none;
-        float: left;
-        min-width: 160px;
-        padding: 5px 0;
-        margin: 2px 0 0;
-        font-size: 14px;
-        text-align: left;
-        list-style: none;
-        background-color: #fff;
-        -webkit-background-clip: padding-box;
-        background-clip: padding-box;
-        border: 1px solid #ccc;
-        border: 1px solid rgba(0, 0, 0, 0.15);
-        border-radius: 4px;
-        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-        max-height: 200px;
+.dropdown-button {
+    cursor: pointer;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    max-height: 200px;
     overflow: auto;
-      }
+}
 
-      .dropdown-menu > li {
-        display: block;
-        padding: 3px 20px;
-        clear: both;
-        font-weight: 400;
-        line-height: 1.42857143;
-        color: #333;
-        white-space: nowrap;
-        text-decoration: none;
-        cursor: pointer;
-      }
+.dropdown-menu > li {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-      .dropdown-menu > li:hover {
-        background: rgba(0, 0, 0, 0.05);
-      }
+.dropdown-menu > li:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
 
-      .dropdown-menu > li.active {
-        color: #77c9e8;
+.dropdown-menu > li.active {
+    color: #77c9e8;
     font-weight: bold;
-      }
+}

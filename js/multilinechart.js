@@ -2,11 +2,11 @@ function multilinechart() {
     const margin = {
         top: 60,
         left: 50,
-        right: 30,
-        bottom: 80
+        right: 0,
+        bottom: 175
     }
     const width = 500 - margin.left - margin.right
-    const height = 500 - margin.top
+    const height = 600 - margin.top
     let line, x, y, colorsScale, legend, pathG, nameText, svg, yAxisG, xAxisG, legendG, yAxis, xAxis
 
     function chart(selector, data) {
@@ -29,8 +29,6 @@ function multilinechart() {
             .range(d3.schemeCategory10)
 
         legend = d3.legendColor()
-            .shapeWidth(10)
-            // .orient('horizontal')
             .scale(colorsScale)
 
         yAxis = g => g
@@ -62,13 +60,7 @@ function multilinechart() {
             .attr("y", margin.top - 10)
             .attr("text-anchor", "middle")
             .style("font-size", "15px")
-            .text(`Student ${data.name} Grades`);
-        svg.append("text") //Title Text
-            .attr("x", (width / 2))
-            .attr("y", 0 + (margin.top / 2))
-            .attr("text-anchor", "middle")
-            .style("font-size", "15px")
-            .text("Grades Recieved By A Student");
+            .text(`Grades Received By ${data.name}`);
 
         xAxisG = svg.append("g")
             .call(xAxis);
@@ -77,7 +69,8 @@ function multilinechart() {
             .call(yAxis);
 
         legendG = svg.append("g")
-            .attr("transform", "translate(" + width + ',' + height / 2 + ")")
+            .attr("transform", "translate(" + margin.left + ',' + 450 + ")")
+            .style("font-size","10px")
             .call(legend);
 
         pathG = svg.append("g")

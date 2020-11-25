@@ -113,9 +113,8 @@ function multilinechart() {
             .range(d3.schemeCategory10)
 
         legend = d3.legendColor()
-            .shapeWidth(10)
-            // .orient('horizontal')
             .scale(colorsScale)
+
         xAxisG = svg.append("g")
             .call(xAxis);
 
@@ -123,7 +122,8 @@ function multilinechart() {
             .call(yAxis);
 
         legendG = svg.append("g")
-            .attr("transform", "translate(" + width + ',' + height / 2 + ")")
+            .attr("transform", "translate(" + margin.left + ',' + 450 + ")")
+            .style("font-size","10px")
             .call(legend);
 
         nameText = svg.append("text") //XAxis text

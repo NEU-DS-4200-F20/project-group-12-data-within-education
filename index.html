@@ -69,14 +69,14 @@
 
   <div>
     <div style="display: flex">
-      <div style="flex: 1 auto; width: 70%; box-sizing: border-box;">
+      <div style="flex: 1 auto; width: 60%; box-sizing: border-box;">
         <div class="table-holder" id='table' style="max-height: 500px;"></div>
       </div>
-      <div style="flex: 1 1 auto; width: 30%; box-sizing: border-box;">
+      <div style="flex: 1 1 auto; width: 40%; box-sizing: border-box;">
         <svg class='scatterplot-holder' id='scatterplot'
              preserveAspectRatio='xMidYMid meet' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
         </svg>
-      </div>sdsdsds
+      </div>
     </div>
   </div>
 
@@ -88,17 +88,19 @@
 
   <div>
     <div style="display: flex">
-      <div style="flex: 1 auto; width: 70%; box-sizing: border-box;">
+      <div style="flex: 1 auto; width: 60%; box-sizing: border-box;">
         <div class="table-holder" id="multilinetable" style="max-height: 500px;"></div>
       </div>
-      <div id="multilinechart" style="flex: 1 1 auto; width: 30%; box-sizing: border-box;">
-        <div class="dropdown">
-          <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                  class="dropdown-button" onclick="onClickButton(event)">
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dLabel">
-          </ul>
+      <div id="multilinechart" style="flex: 1 1 auto; width: 40%; box-sizing: border-box;">
+        <div style="padding-left: 50px;">
+          <div class="dropdown">
+            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    class="dropdown-button" onclick="onClickButton(event)">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dLabel">
+            </ul>
+          </div>
         </div>
       </div>
     </div>

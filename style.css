@@ -21,6 +21,8 @@ h1, h2, h3 {
     height: 100%;
 }
 
+
+
 .scatterplot-holder {
     display: flex;
     overflow: visible;
@@ -43,6 +45,14 @@ h1, h2, h3 {
     overflow-y: auto;
     height: 600px;
     text-align: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    cursor: default;
 }
 
 .table-holder thead th {
@@ -102,6 +112,11 @@ circle.selected {
     fill: pink;
     stroke: black;
     opacity: 1;
+}
+
+circle.nonselected{
+    fill: white;
+    stroke: white;
 }
 
 /* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */

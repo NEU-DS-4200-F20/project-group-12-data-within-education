@@ -133,12 +133,15 @@
         .selectionDispatcher(d3.dispatch(dispatchString))
         ("#table", data.filter(function(d){return d.assignType === "quiz" || d.assignType === "offline-quiz"} )); // Call the table function on the table div
 
-    let histogram = histograms()
-    ("#histogram1", data);
+  
 
     scatter.selectionDispatcher().on(dispatchString, function(selectedData) {
       htmltable.updateSelection(selectedData)
     });
+
+    htmltable.selectionDispatcher().on(dispatchString, function(selectedData) {
+      scatter.updateSelection(selectedData)
+  });
 
 
   });

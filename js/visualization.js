@@ -29,7 +29,7 @@
       formatDropDown()
       const { studentClassData, ...multilineChartData } = getChartDataByUserId(userId)
       let multiline = multilinechart()("#multilinechart", multilineChartData)
-      let multilinetable = table()("#multilinetable", studentClassData);
+      let multilinetable = studenttable()("#multilinetable", studentClassData);
 
       // Might be broken
       function getChartDataByUserId(userId) {
@@ -140,10 +140,6 @@
     scatter.selectionDispatcher().on('resetTable', function(selectedData) {
       htmltable.updateSelection(selectedData)
     });
-
-    
-
-   
 
     htmltable.selectionDispatcher().on(dispatchString, function(selectedData) {
       scatter.updateSelection(selectedData)

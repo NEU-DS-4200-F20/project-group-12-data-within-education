@@ -5,7 +5,6 @@
   // JSON.stringify(YOUR_OBJECT), just remove the surrounding "")
   d3.json("data/data.json").then(data => {
 
-    console.log(data)
     data.forEach(d => {
       d.classId = d.classId;
       d.className = d.className;
@@ -69,7 +68,6 @@
             values: dates.map(d => groupByClassMap[key][d] || 0)
           }
         })
-        console.log('dates', dates, series)
 
         dates = dates.map(d => d3.utcParse("%m-%d-%y")(d))
         return { series, dates, name: students[userId], studentClassData }
@@ -125,7 +123,7 @@
 
     let scatter = scatterplot()
         .yLabel("Score")
-        .selectionDispatcher(d3.dispatch(dispatchString))
+        .selectionDispatcher(d3.dispatch(dispatchString, 'resetTable'))
         .xLabel('Time Spent (Minutes)')
         ("#scatterplot", data); // Call the scatterplot function on the scatterplot div
 
@@ -136,8 +134,16 @@
   
 
     scatter.selectionDispatcher().on(dispatchString, function(selectedData) {
+      htmltable.update(selectedData)
+    });
+    
+    scatter.selectionDispatcher().on('resetTable', function(selectedData) {
       htmltable.updateSelection(selectedData)
     });
+
+    
+
+   
 
     htmltable.selectionDispatcher().on(dispatchString, function(selectedData) {
       scatter.updateSelection(selectedData)

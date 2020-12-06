@@ -66,7 +66,7 @@
         const series = Object.keys(groupByClassMap).map(key => {
           return {
             name: key,
-            values: dates.map(d => groupByClassMap[key][d])
+            values: dates.map(d => groupByClassMap[key][d] || 0)
           }
         })
         console.log('dates', dates, series)

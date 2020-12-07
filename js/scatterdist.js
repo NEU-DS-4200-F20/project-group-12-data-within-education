@@ -22,12 +22,16 @@ function scatterplot() {
         yScale = d3.scaleLinear(),
         ourBrush = null,
         selectableElements = d3.select(null),
-        dispatcher;
-
+        dispatcher,
+        idleTimeout,
+        idleDelay = 350;
 
     // Below are the basic D3 principles applied to make a scatterplot
 
     function chart(selector, data) {
+
+        var clicks = 0
+
 
         //For timespent it is only applicable for quiz and offline quiz
         data = data.filter(function(d){return d.assignType === "quiz" || d.assignType === "offline-quiz"} )
@@ -36,6 +40,31 @@ function scatterplot() {
             .append('svg')
             .attr('preserveAspectRatio', 'xMidYMid meet')
             .attr('viewBox', [0, -50, width, height + 175].join(' '))
+            .on("dblclick", function (){
+                dispatcher.call('selectionUpdated', this, data)
+            })
+            .on("mousedown", function (){
+                dispatcher.call('resetTable', this, svg.selectAll('.selected').data())
+            })
+            .on("click", function(){ //Need in case of triple click errors
+                clicks ++ // Add to click variable
+                setTimeout(function(){ //Set a timer to allow a short period of time for a double click
+                  if (clicks >= 3){
+                    dispatcher.call('selectionUpdated', this, data) // Once clicks is equal to two within the 250 MS, call to listen for the dispatch event labeled changeColor2
+                    clicks = 0 // Resets click back to zero once the 250 MS runs up
+                  }
+                  clicks = 0 // Resets click back to zero once the 250 MS runs up
+                }, 1000) // 250 MS time to get two clicks
+              })
+              
+              // https://bl.ocks.org/mthh/e9ebf74e8c8098e67ca0a582b30b0bf0
+            
+        var clip = svg.append("defs").append("svg:clipPath")
+            .attr("id", "clip")
+            .append("rect")
+            .attr("width", width )
+            .attr("height", height )
+            
 
         //Title Text
         svg.append("text")
@@ -63,6 +92,7 @@ function scatterplot() {
 
         let xAxis = svg.append('g')
             .attr('transform', 'translate(0,' + (height) + ')')
+            .attr('id', "axis--x")
             .call(d3.axisBottom(xScale));
 
         // X axis label
@@ -76,11 +106,12 @@ function scatterplot() {
 
 
         let yAxis = svg.append('g')
+            .attr('id', "axis--y")
             .call(d3.axisLeft(yScale))
 
         yAxis.append('text')
             .attr('class', 'axisLabel')
-            .attr('y', -25)
+            .attr('y', -40)
             .attr('fill', 'black')
             .attr('x', -height/2)
             .attr('transform', `rotate(-90)`)
@@ -91,22 +122,28 @@ function scatterplot() {
         var colorScale = d3.scaleOrdinal(d3.schemeCategory10)
             .domain(data.map(function (d){ return d.className; })); //ColorScheme set up based on class name
 
+    
+
         let points = svg.append('g')
-            .selectAll('.scatterPoint')
-            .data(data);
+            .attr("id", "points")
+            .attr("clip-path", "url(#clip)")
+            
+            
 
-        points.exit().remove();
-
-        points = points
+        points.selectAll('.scatterPoint')
+            .data(data)
             .enter().append('circle')
             .attr('cy', d => yScale(yValue(d))) //Scale the y datapoint
             .attr('cx', d => xScale(xValue(d))) //Scale the x datapoint
             .attr('r', 4)
+            .attr('stroke-width', 1.1)
             .style("stroke", function(d) { //Color logic for the scatterplot points
                 return colorScale(d.className)
             })
+        
+            
 
-
+           
         let statusMap = new Map();   // https://observablehq.com/@d3/d3v6-migration-guide
         data.forEach(d => {       // Using the migration guide to apply d3.Map in V6
             if (!statusMap.has(d.className)) statusMap.set(d.className, d);  // Add if not already present
@@ -135,14 +172,13 @@ function scatterplot() {
             .style("alignment-baseline", "middle")
             .style("font-size", "12px")
             .style("fill", function(d) { //Color logic for the scatterplot points
-                console.log(d)
                 return colorScale(d.className)
             })
 
 
         selectableElements = points;
-
         svg.call(brush);
+        
 
         // Highlight points when brushed
         function brush(g) {
@@ -167,29 +203,46 @@ function scatterplot() {
                 ] = event.selection;
 
                 // If within the bounds of the brush, select it
-                points.classed('selected', d =>
-                    x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1
-                )
-
-                // Get the name of our dispatcher's event
-                let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-                // Let other charts know about our selection
-                console.log(svg.selectAll('.selected'))
-                dispatcher.call(dispatchString, this, svg.selectAll('.selected').data());
+                points.selectAll("circle").attr('class', function(d){
+                    if (x0 <= X(d) && X(d) <= x1 && y0 <= Y(d) && Y(d) <= y1)
+                    return "selected"
+                    else
+                    return "normal"
+                }
+                )                
             }
 
             function brushEnd(event, d){
-                // We don't want infinite recursion
-                if(event.sourceEvent !== undefined && event.sourceEvent.type!='end'){
+                var s = event.selection
+                if (!s) {
+                    if (!idleTimeout) return idleTimeout = setTimeout(idled, idleDelay);
+                    xScale.domain(d3.extent(data, xValue)).nice();
+                    yScale.domain(d3.extent(data, yValue)).nice();
+                } else {
+                    xScale.domain([s[0][0], s[1][0]].map(xScale.invert, xScale));
+                    yScale.domain([s[1][1], s[0][1]].map(yScale.invert, yScale));
                     d3.select(this).call(brush.move, null);
                 }
+
+                zoom();
+                dispatcher.call('selectionUpdated', this, svg.selectAll('.selected').data());
             }
         }
 
+        function idled() {
+            idleTimeout = null;
+        }
+
+        function zoom() {
+            svg.select("#axis--x").transition().call(d3.axisBottom(xScale));
+            svg.select("#axis--y").transition().call(d3.axisLeft(yScale));
+            points.selectAll("circle").transition().duration(800)
+            .attr("cx", d => xScale(xValue(d)))
+            .attr("cy", d => yScale(yValue(d)))
+        }
+ 
         return chart;
     }
-
-
     // Below are the changeable chart elements based on the resuable model
     // Not all are being called on currently
     // The x-accessor from the datum
@@ -256,18 +309,18 @@ function scatterplot() {
         dispatcher = _;
         return chart;
     };
-
     // Given selected data from another visualization 
     // select the relevant elements here (linking)
     chart.updateSelection = function (selectedData) {
         if (!arguments.length) return;
-
-        // Select an element if its datum was selected
-        selectableElements.classed('selected', d =>
-            selectedData.includes(d)
-        ).classed('nonselected');
-      
-
+        // Select an element if its datum was selected  
+        selectableElements.selectAll("circle").attr('class', function(d){
+            if (selectedData.includes(d))
+            return "selected"
+            else
+            return "nonselected"
+        }
+        )
     };
 
     return chart;

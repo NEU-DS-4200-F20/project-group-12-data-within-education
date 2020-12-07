@@ -31,16 +31,15 @@ function table(){
     //Create table features
     // https://bost.ocks.org/mike/chart/ ideas from here
 
-    var columns = ["name", "className", "title", "score", "totalPoints", "submitTime", "dueDate"] // the data keys of the json
+    var columns = ["name", "className", "title", "score", "totalPoints",  "dueDate", "submitTime"] // the data keys of the json
 
-    console.log(Object.keys(data[0]));
 
     let thead = table.append('thead') //start off table head
     let tbody = table.append('tbody') //start off table body
 
     var header = thead.append("tr")
         .selectAll("th")
-        .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Time submitted", "Due Date"]) //place the columns data as the table header
+        .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Due Date", "Time submitted"]) //place the columns data as the table header
         .enter()
         .append("th")
         .text(function(data){return data;})
@@ -60,11 +59,11 @@ function table(){
         .enter()
         .append("td")
         .html(function(data){ return data.value})
+    
     selectableElements = d3.selectAll(rows)
 
-
+    
     chart.update = function (data) {
-      console.log('selector', selector)
       d3.select(selector).select('table').remove()
       table = d3.select(selector)
           .append('table')
@@ -97,6 +96,96 @@ function table(){
           .enter()
           .append("td")
           .html(function (data) { return data.value })
+    
+
+    selectableElements = d3.selectAll(rows)
+    var continueSelection = d3.dispatch('continueSelection')
+    var triggerMouseup = d3.dispatch('triggerMouseup')
+    var resumeMouseover = d3.dispatch('resumeMouseover')
+    var resetEvents = d3.dispatch('resetEvents')
+
+    //Dispatch Event to reset the prior dispatch events on the table
+    // All previous selected and highlighted events are wiped away
+    // after the next mousedown, wipe all selections/highlights
+    // then highlight/select that first row mousedown'd on
+    // send that data to the other charts, then dispatch trigger the
+    resetEvents.on('resetEvents', function(){
+        selectableElements.on("mousedown", (event, d) => {
+            d3.selectAll(rows).classed('selected', false) //clear all selected style rows
+            d3.selectAll(rows).classed('highlighted', false) // clear all highlighted style rows
+            d3.select(event.currentTarget).classed('highlighted', true) // highlight style the row mousedown'd on
+            d3.select(event.currentTarget).classed('selected', true) // select style the row to send to the other charts
+            let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+            dispatcher.call(dispatchString, event.currentTarget, table.selectAll('.selected').data());
+            continueSelection.call('continueSelection')
+        })
+    })
+
+    //This dispatch event handles how the mouseover will perform
+    // If the current targets class is 'selected', then the highlighted mouseover will follow
+    // If the class is not 'selected', a gray mouseover will follow
+    // The mouseout makes sure the ensuing state of the row does not stay highlighted as red or mouseover'd as grey
+
+    resumeMouseover.on('resumeMouseover', function(selections){
+       selectableElements.on("mouseover", (event, d) => { //Idea for if statement found here: https://stackoverflow.com/questions/45423918/event-listener-to-determine-if-clicked-target-is-element-of-specific-class
+            if (event.currentTarget.className === 'selected'){ //if class of table row is selected
+            d3.select(event.currentTarget).classed('highlighted', true) //Mouse over using the highlighted style
+            resetEvents.call('resetEvents') //trigger resetEvents
+            }
+            else{
+            d3.select(event.currentTarget).classed('mouseover', true) //Mouse over using the mouseover style
+            resetEvents.call('resetEvents') //trigger resetEvents
+            }
+            })
+        .on("mouseout", (event, d) => {
+                d3.select(event.currentTarget).classed('mouseover', false) //remove the mosueover style after mouseout
+                d3.selectAll(rows).classed('highlighted', false) //remove the highlighted style after mouseout
+                resetEvents.call('resetEvents') //trigger resetEvents to take next step
+                })
+    })
+    // When the mouse click is released, trigger a mouseup event to handle
+    // the resulting mouseovers
+    triggerMouseup.on('triggerMouseup', function(){
+            selectableElements.on("mouseup", (event, d) => {
+                resumeMouseover.call('resumeMouseover') //resumeMouseover handles the mouseover events after this continueSeleciton selection stage
+            })
+        })
+    
+    // While the mouse is still down perform a mouseover event
+    // Perform proper highlighting and selection
+    continueSelection.on('continueSelection', function(){ //trigger dispatch event function
+            selectableElements.on('mouseover', (event, d) => {
+            d3.selectAll(rows).classed('highlighted', false) // Remove any previous highlighted rows style
+            d3.select(event.currentTarget).classed('highlighted', true) //Immeadietly highlight the selection 
+            d3.select(event.currentTarget).classed('selected', true) //Immeadielty turn it to a selected class to send to the other charts
+            let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+            dispatcher.call(dispatchString, event.currentTarget, table.selectAll('.selected').data());
+            triggerMouseup.call('triggerMouseup')
+            })
+            .on("mouseup", (event, d) => {
+                resumeMouseover.call('resumeMouseover') //skip mouseup event and immeadietly trigger resumeMouseover
+            })
+            }
+        )
+    
+    // Basic mouse events
+    // The mousedown triggers the resulting dispatch events        
+    d3.selectAll(rows)
+        .on("mouseover", (event, d) => {
+        d3.select(event.currentTarget).classed('mouseover', true) //normal mouseover style prior to any clicks
+        })
+    
+    .on("mousedown", (event, d) => { 
+            d3.select(event.currentTarget).classed('highlighted', true) //Highlight current selection
+            d3.select(event.currentTarget).classed('selected', true) // Immeadiately turn it to a selected class to sent to the charts
+            let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+            dispatcher.call(dispatchString, event.currentTarget, table.selectAll('.selected').data()); // Send selected class to charts
+            continueSelection.call('continueSelection') //This triggers resulting events
+        })
+    .on("mouseout", (event, d) => {
+            d3.select(event.currentTarget).classed('mouseover', false)
+            })
+
     }
 
     selectableElements = d3.selectAll(rows)
@@ -187,12 +276,12 @@ function table(){
             d3.select(event.currentTarget).classed('mouseover', false)
             })
 
-
     return chart;
   }
 
   // Below are the potential changes that could be made using the resuable charts model
 
+  
   chart.margin = function (_) {
     if (!arguments.length) return margin;
     margin = _;
@@ -223,6 +312,12 @@ function table(){
     return chart;
   };
 
+  chart.newData = function (_) {
+    if (!arguments.length) return dispatcher;
+    newData = _;
+    return chart;
+  };
+
   // Given selected data from another visualization
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
@@ -232,6 +327,7 @@ function table(){
     selectableElements.classed('selected', d =>
         selectedData.includes(d)
     );
+    
   };
 
   return chart

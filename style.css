@@ -21,11 +21,13 @@ h1, h2, h3 {
     height: 100%;
 }
 
+.area {
+    clip-path: url(#clip);
+}
 
 
 .scatterplot-holder {
     display: flex;
-    overflow: visible;
     flex: 0 0 50%; /* First Flex, set to 50% for side by side */
 }
 .scatterplot{
@@ -108,15 +110,19 @@ tr.mouseover.selected{
 }
 
 circle.selected {
-    background-color: yellow;
-    fill: pink;
-    stroke: black;
-    opacity: 1;
+    stroke-width: 1.1;
+    fill: lightgrey;
+    opacity: 2;
+    
 }
 
 circle.nonselected{
-    fill: white;
-    stroke: white;
+    stroke-width: 1.1;
+    opacity: 0.2;
+}
+circle.normal{
+    stroke-width: 1.1;
+    opacity: 1;
 }
 
 /* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */

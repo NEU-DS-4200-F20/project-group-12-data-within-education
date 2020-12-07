@@ -60,7 +60,16 @@ function multilinechart() {
                 .attr('text-anchor', 'start')
                 .attr('font-weight', 'bold')
                 .text(data.y)
-            );
+            )
+            .append('text')
+            .attr('class', 'axisLabel')
+            .attr('y', -35)
+            .attr('fill', 'black')
+            .attr('x', -height/3 -30)
+            .attr('transform', `rotate(-90)`)
+            .attr('text-anchor', 'middle')
+            .style("font-size", "10px")
+            .text('Grade');
 
         xAxis = g => g
             .attr('transform', `translate(0,${height - margin.bottom})`)
@@ -73,7 +82,15 @@ function multilinechart() {
                 g
                     .selectAll('g.tick text')
                     .attr('transform', `rotate(45) translate(40, 0)`)
-            );
+            )
+
+            .append('text')
+            .attr('class', 'axisLabel')
+            .attr('y', 75)
+            .attr('fill', 'black')
+            .style("font-size", "10px")
+            .attr('x', (width) / 2)
+            .text('Submission Time'); //xLabelText is applied in the main visualization.js file
 
         svg = d3
             .select(selector)

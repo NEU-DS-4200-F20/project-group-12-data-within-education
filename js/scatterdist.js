@@ -58,6 +58,7 @@ function scatterplot() {
               })
               
               // https://bl.ocks.org/mthh/e9ebf74e8c8098e67ca0a582b30b0bf0
+              // All code inspiration from the zoom comes from here
             
         var clip = svg.append("defs").append("svg:clipPath")
             .attr("id", "clip")

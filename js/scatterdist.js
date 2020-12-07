@@ -71,7 +71,7 @@ function scatterplot() {
             .attr("x", (450 / 2))
             .attr("y", -30)
             .attr("text-anchor", "middle")
-            .style("font-size", "21px")
+            .style("font-size", "15px")
             .text("Quiz Grades by Time Spent");
 
         svg = svg.append('g')
@@ -170,7 +170,7 @@ function scatterplot() {
             .text(function(d){ return d.className})
             .attr("text-anchor", "left")
             .style("alignment-baseline", "middle")
-            .style("font-size", "12px")
+            .style("font-size", "10px")
             .style("fill", function(d) { //Color logic for the scatterplot points
                 return colorScale(d.className)
             })

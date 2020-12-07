@@ -11,7 +11,7 @@ h1, h2, h3 {
 
 /* Your text should be in a nice narrow column */
 .content-column {
-    max-width: 650px;
+    max-width: 700px;
     margin: 40px auto;
 }
 
@@ -19,8 +19,8 @@ h1, h2, h3 {
 .vis-holder {
     width: 100%;
     height: 100%;
-    max-width: 1000px;
-    margin: 40px auto;
+    max-width: 1350px;
+    margin: 50px auto;
 }
 
 .area {
@@ -72,17 +72,19 @@ tr.selected {
 /* Pretty table layout */
 table {
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 12px;
     width: 100%;
+    overflow-x: scroll;
 }
 
 th {
     background: #eee;
+    overflow-x: auto;
 }
 
 th, td {
     /* vertical | horizontal */
-    padding: 0 8px;
+    padding: 2px 4px;
 }
 
 /* Don't also do text drag selection */
@@ -248,4 +250,55 @@ circle.normal{
 .dropdown-menu > li.active {
     color: #77c9e8;
     font-weight: bold;
+}
+
+.flex-group {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-item-left {
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+}
+
+.flex-item-right {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.flex-item-right-bottom {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 50px;
+    justify-content: center;
+    transform: scale(1.2);
+}
+
+@media (min-width: 850px) {
+    .flex-group {
+        flex-direction: row;
+    }
+
+    .flex-item-left {
+        flex: 1 auto;
+        flex: none;
+        width: 60%;
+        box-sizing: border-box;
+    }
+
+    .flex-item-right {
+        width: 55%;
+        box-sizing: border-box;
+    }
+
+    .flex-item-right-bottom {
+        width: 55%;
+        box-sizing: border-box;
+        margin: 0;
+        margin-left: 60px;
+        margin-top: 10px;
+        transform: scale(1.1);
+    }
 }

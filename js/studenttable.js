@@ -32,7 +32,7 @@ function studenttable(){
             //Create table features
             // https://bost.ocks.org/mike/chart/ ideas from here
         
-            var columns = ["name", "className", "title", "score", "totalPoints", "submitTime", "dueDate"] // the data keys of the json
+            var columns = ["name", "className", "title", "score", "submitTime", "dueDate"] // the data keys of the json
         
         
             let thead = table.append('thead') //start off table head
@@ -40,7 +40,7 @@ function studenttable(){
         
             var header = thead.append("tr")
                 .selectAll("th")
-                .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Time submitted", "Due Date"]) //place the columns data as the table header
+                .data(["Student name", "Class", "Assignment", "Grade", "Due", "Time submitted"]) //place the columns data as the table header
                 .enter()
                 .append("th")
                 .text(function(data){return data;})
@@ -50,11 +50,19 @@ function studenttable(){
                 .data(data) // set up the table rows with the data
                 .enter()
                 .append("tr")
-        
+
+            function valueGetter(d, row) {
+                if (d === "score") {
+                    return row[d] + "/" + row["totalPoints"]
+                } else {
+                    return row[d]
+                }
+            }
+
             var cells = rows.selectAll("td")
                 .data(function(row){
                   return columns.map(function(d, i){
-                    return {i: d, value: row[d]}; //enter the individual values into each table row cell based on index
+                    return {i: d, value: valueGetter(d, row)}; //enter the individual values into each table row cell based on index
                   });
                 })
                 .enter()
@@ -77,7 +85,7 @@ function studenttable(){
           
                 var header = thead.append("tr")
                     .selectAll("th")
-                    .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Time submitted", "Due Date"])
+                    .data(["Student name", "Class", "Assignment", "Grade", "Due", "Time submitted"])
                     .enter()
                     .append("th")
                     .text(function (data) { return data; })
@@ -91,7 +99,7 @@ function studenttable(){
                 var cells = rows.selectAll("td")
                     .data(function (row) {
                       return columns.map(function (d, i) {
-                        return { i: d, value: row[d] }; //enter the individual values into each table row cell based on index
+                        return { i: d, value: valueGetter(d, row) }; //enter the individual values into each table row cell based on index
                       });
                     })
                     .enter()

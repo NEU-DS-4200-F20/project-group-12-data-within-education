@@ -31,7 +31,7 @@ function table(){
     //Create table features
     // https://bost.ocks.org/mike/chart/ ideas from here
 
-    var columns = ["name", "className", "title", "score", "totalPoints",  "dueDate", "submitTime"] // the data keys of the json
+    var columns = ["name", "className", "title", "score", "dueDate", "submitTime"] // the data keys of the json
 
 
     let thead = table.append('thead') //start off table head
@@ -39,7 +39,7 @@ function table(){
 
     var header = thead.append("tr")
         .selectAll("th")
-        .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Due Date", "Time submitted"]) //place the columns data as the table header
+        .data(["Student name", "Class", "Assignment", "Grade", "Due", "Time submitted"]) //place the columns data as the table header
         .enter()
         .append("th")
         .text(function(data){return data;})
@@ -53,7 +53,10 @@ function table(){
     var cells = rows.selectAll("td")
         .data(function(row){
           return columns.map(function(d, i){
-            return {i: d, value: row[d]}; //enter the individual values into each table row cell based on index
+            return {
+               /* i: d, value: row[d] + "/" + row["totalPoints"]*/
+                i: d, value: valueGetter(d, row)
+            }; //enter the individual values into each table row cell based on index
           });
         })
         .enter()
@@ -62,6 +65,13 @@ function table(){
     
     selectableElements = d3.selectAll(rows)
 
+      function valueGetter(d, row) {
+          if (d === "score") {
+              return row[d] + "/" + row["totalPoints"]
+          } else {
+              return row[d]
+          }
+      }
     
     chart.update = function (data) {
       d3.select(selector).select('table').remove()
@@ -76,7 +86,7 @@ function table(){
 
       var header = thead.append("tr")
           .selectAll("th")
-          .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Time submitted", "Due Date"])
+          .data(["Student name", "Class", "Assignment", "Grade", "Due", "Time submitted"])
           .enter()
           .append("th")
           .text(function (data) { return data; })
@@ -90,13 +100,13 @@ function table(){
       var cells = rows.selectAll("td")
           .data(function (row) {
             return columns.map(function (d, i) {
-              return { i: d, value: row[d] }; //enter the individual values into each table row cell based on index
+              return {  i: d, value: valueGetter(d, row) }; //enter the individual values into each table row cell based on index
             });
           })
           .enter()
           .append("td")
           .html(function (data) { return data.value })
-    
+
 
     selectableElements = d3.selectAll(rows)
     var continueSelection = d3.dispatch('continueSelection')
@@ -150,13 +160,13 @@ function table(){
                 resumeMouseover.call('resumeMouseover') //resumeMouseover handles the mouseover events after this continueSeleciton selection stage
             })
         })
-    
+
     // While the mouse is still down perform a mouseover event
     // Perform proper highlighting and selection
     continueSelection.on('continueSelection', function(){ //trigger dispatch event function
             selectableElements.on('mouseover', (event, d) => {
             d3.selectAll(rows).classed('highlighted', false) // Remove any previous highlighted rows style
-            d3.select(event.currentTarget).classed('highlighted', true) //Immeadietly highlight the selection 
+            d3.select(event.currentTarget).classed('highlighted', true) //Immeadietly highlight the selection
             d3.select(event.currentTarget).classed('selected', true) //Immeadielty turn it to a selected class to send to the other charts
             let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
             dispatcher.call(dispatchString, event.currentTarget, table.selectAll('.selected').data());
@@ -167,15 +177,15 @@ function table(){
             })
             }
         )
-    
+
     // Basic mouse events
-    // The mousedown triggers the resulting dispatch events        
+    // The mousedown triggers the resulting dispatch events
     d3.selectAll(rows)
         .on("mouseover", (event, d) => {
         d3.select(event.currentTarget).classed('mouseover', true) //normal mouseover style prior to any clicks
         })
-    
-    .on("mousedown", (event, d) => { 
+
+    .on("mousedown", (event, d) => {
             d3.select(event.currentTarget).classed('highlighted', true) //Highlight current selection
             d3.select(event.currentTarget).classed('selected', true) // Immeadiately turn it to a selected class to sent to the charts
             let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
@@ -240,13 +250,13 @@ function table(){
                 resumeMouseover.call('resumeMouseover') //resumeMouseover handles the mouseover events after this continueSeleciton selection stage
             })
         })
-    
+
     // While the mouse is still down perform a mouseover event
     // Perform proper highlighting and selection
     continueSelection.on('continueSelection', function(){ //trigger dispatch event function
             selectableElements.on('mouseover', (event, d) => {
             d3.selectAll(rows).classed('highlighted', false) // Remove any previous highlighted rows style
-            d3.select(event.currentTarget).classed('highlighted', true) //Immeadietly highlight the selection 
+            d3.select(event.currentTarget).classed('highlighted', true) //Immeadietly highlight the selection
             d3.select(event.currentTarget).classed('selected', true) //Immeadielty turn it to a selected class to send to the other charts
             let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
             dispatcher.call(dispatchString, event.currentTarget, table.selectAll('.selected').data());
@@ -257,15 +267,15 @@ function table(){
             })
             }
         )
-    
+
     // Basic mouse events
-    // The mousedown triggers the resulting dispatch events        
+    // The mousedown triggers the resulting dispatch events
     d3.selectAll(rows)
         .on("mouseover", (event, d) => {
         d3.select(event.currentTarget).classed('mouseover', true) //normal mouseover style prior to any clicks
         })
-    
-    .on("mousedown", (event, d) => { 
+
+    .on("mousedown", (event, d) => {
             d3.select(event.currentTarget).classed('highlighted', true) //Highlight current selection
             d3.select(event.currentTarget).classed('selected', true) // Immeadiately turn it to a selected class to sent to the charts
             let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];

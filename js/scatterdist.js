@@ -101,7 +101,7 @@ function scatterplot() {
             .attr('class', 'axisLabel')
             .attr('y', 35)
             .attr('fill', 'black')
-            .style("font-size", "10px")
+            .style("font-size", "14px")
             .attr('x', (width) / 2)
             .text(xLabelText); //xLabelText is applied in the main visualization.js file
 
@@ -117,7 +117,7 @@ function scatterplot() {
             .attr('x', -height/2)
             .attr('transform', `rotate(-90)`)
             .attr('text-anchor', 'middle')
-            .style("font-size", "10px")
+            .style("font-size", "14px")
             .text(yLabelText);//yLabelText is applied in the main visualization.js file
 
         var colorScale = d3.scaleOrdinal(d3.schemeCategory10)

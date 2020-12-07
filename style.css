@@ -13,6 +13,7 @@ h1, h2, h3 {
 .content-column {
     max-width: 700px;
     margin: 40px auto;
+    margin-top: -70px;
 }
 
 /* But your visualization should be full-width and full-height */

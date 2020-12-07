@@ -44,7 +44,6 @@ function scatterplot() {
                 dispatcher.call('selectionUpdated', this, data)
             })
             .on("mousedown", function (){
-                console.log(svg.selectAll('.selected').data())
                 dispatcher.call('resetTable', this, svg.selectAll('.selected').data())
             })
             .on("click", function(){ //Need in case of triple click errors
@@ -56,9 +55,8 @@ function scatterplot() {
                   }
                   clicks = 0 // Resets click back to zero once the 250 MS runs up
                 }, 1000) // 250 MS time to get two clicks
-              });
-
-
+              })
+              
               // https://bl.ocks.org/mthh/e9ebf74e8c8098e67ca0a582b30b0bf0
             
         var clip = svg.append("defs").append("svg:clipPath")
@@ -66,6 +64,7 @@ function scatterplot() {
             .append("rect")
             .attr("width", width )
             .attr("height", height )
+            
 
         //Title Text
         svg.append("text")
@@ -129,8 +128,7 @@ function scatterplot() {
             .attr("id", "points")
             .attr("clip-path", "url(#clip)")
             
-           
-
+            
 
         points.selectAll('.scatterPoint')
             .data(data)
@@ -142,6 +140,9 @@ function scatterplot() {
             .style("stroke", function(d) { //Color logic for the scatterplot points
                 return colorScale(d.className)
             })
+        
+            
+
            
         let statusMap = new Map();   // https://observablehq.com/@d3/d3v6-migration-guide
         data.forEach(d => {       // Using the migration guide to apply d3.Map in V6
@@ -235,7 +236,7 @@ function scatterplot() {
         function zoom() {
             svg.select("#axis--x").transition().call(d3.axisBottom(xScale));
             svg.select("#axis--y").transition().call(d3.axisLeft(yScale));
-            points.selectAll("circle").transition().duration(600)
+            points.selectAll("circle").transition().duration(800)
             .attr("cx", d => xScale(xValue(d)))
             .attr("cy", d => yScale(yValue(d)))
         }

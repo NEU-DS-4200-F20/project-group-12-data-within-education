@@ -31,7 +31,7 @@ function table(){
     //Create table features
     // https://bost.ocks.org/mike/chart/ ideas from here
 
-    var columns = ["name", "className", "title", "score", "totalPoints", "submitTime", "dueDate"] // the data keys of the json
+    var columns = ["name", "className", "title", "score", "totalPoints",  "dueDate", "submitTime"] // the data keys of the json
 
 
     let thead = table.append('thead') //start off table head
@@ -39,7 +39,7 @@ function table(){
 
     var header = thead.append("tr")
         .selectAll("th")
-        .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Time submitted", "Due Date"]) //place the columns data as the table header
+        .data(["Student name", "Class", "Assignment", "Grade", "Available Points", "Due Date", "Time submitted"]) //place the columns data as the table header
         .enter()
         .append("th")
         .text(function(data){return data;})
@@ -64,7 +64,6 @@ function table(){
 
     
     chart.update = function (data) {
-      console.log('selector', selector)
       d3.select(selector).select('table').remove()
       table = d3.select(selector)
           .append('table')
@@ -276,9 +275,6 @@ function table(){
     .on("mouseout", (event, d) => {
             d3.select(event.currentTarget).classed('mouseover', false)
             })
-
-    
-
 
     return chart;
   }

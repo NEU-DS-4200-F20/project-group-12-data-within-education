@@ -148,6 +148,7 @@ circle.normal{
     right:50%;
     margin-right: -125px;
     transition:0.5s;
+    z-index:99999;
 }
 #forkongithub a:hover{
     background:#171717;
@@ -176,7 +177,7 @@ circle.normal{
         width:200px;
         overflow:hidden;
         height:200px;
-        z-index:9999;
+        z-index:99999;
     }
     #forkongithub a{
         width:200px;
@@ -288,14 +289,15 @@ circle.normal{
     width: 120%;
     box-sizing: border-box;
     margin-bottom: 50px;
+    margin-left: -30px;
 }
 
 .flex-item-right-bottom {
     width: 100%;
     box-sizing: border-box;
-    margin: 120px;
+    margin: auto;
     justify-content: center;
-    transform: scale(1.4);
+    transform: scale(1);
 }
 
 img {
@@ -325,6 +327,7 @@ img {
         box-sizing: border-box;
         margin: 0;
         margin-top: 10px;
+        margin-left: 60px;
         transform: scale(1.15);
     }
 

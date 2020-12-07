@@ -104,18 +104,11 @@ function multilinechart() {
 
         nameText = svg
             .append('text') //XAxis text
-            .attr('x', width / 2)
-            .attr('y', margin.top - 10)
+            .attr('x', width / 2 + 40)
+            .attr('y', margin.top / 2)
             .attr('text-anchor', 'middle')
             .style('font-size', '15px')
-            .text(`${data.name}`);
-        svg
-            .append('text') //Title Text
-            .attr('x', width / 2)
-            .attr('y', 0 + margin.top / 2)
-            .attr('text-anchor', 'middle')
-            .style('font-size', '15px')
-            .text('Student Grade Average Of:');
+            .text( 'Student Grade Average Of: ' + `${data.name}`);
 
         xAxisG = svg.append('g').call(xAxis);
 
@@ -183,11 +176,11 @@ function multilinechart() {
 
         nameText = svg
             .append('text') //XAxis text
-            .attr('x', width / 2)
-            .attr('y', margin.top - 10)
+            .attr('x', width / 2 + 40)
+            .attr('y', margin.top / 2)
             .attr('text-anchor', 'middle')
             .style('font-size', '15px')
-            .text(`${data.name}`);
+            .text( 'Student Grade Average Of: ' + `${data.name}`);
         pathG.attr('fill', 'none')
             .attr('stroke-width', 1.5)
             .attr('stroke-linejoin', 'round')

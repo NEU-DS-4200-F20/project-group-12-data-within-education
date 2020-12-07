@@ -1,6 +1,7 @@
 /* General formatting */
 body {
     padding: 0 50px;
+    margin-top: 100px;
     font: 18px/1.5 -apple-system, BlinkMacSystemFont, "avenir next",avenir, "Segoe UI", "lucida grande", "helvetica neue", helvetica, "Fira Sans",roboto, noto, "Droid Sans", cantarell, oxygen, ubuntu, "franklin gothic medium", "century gothic", "Liberation Sans",
     sans-serif;
 }
@@ -130,39 +131,43 @@ circle.normal{
     opacity: 1;
 }
 
+
 /* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */
 #forkongithub a{
-    background:#00F;
+    background:#363636;
     color:#fff;
     text-decoration:none;
     font-family:arial,sans-serif;
     text-align:center;
     font-weight:bold;
-    padding:5px 40px;
+    padding:8px 40px;
     font-size:1rem;
-    line-height:1.4rem;
-    position:relative;
+    line-height:1.2rem;
+    position: fixed;
+    top: calc(100vh - 75px);
+    right:50%;
+    margin-right: -125px;
     transition:0.5s;
 }
 #forkongithub a:hover{
-    background:#118;
-    color:#fff;
+    background:#171717;
+    color:rgba(256,256,256,0.8);
 }
 #forkongithub a::before,#forkongithub a::after{
     content:"";
     width:100%;
     display:block;
     position:absolute;
-    top:1px;
+    top:3px;
     left:0;
-    height:1px;
+    height:2px;
     background:#fff;
 }
 #forkongithub a::after{
-    bottom:1px;
+    bottom:3px;
     top:auto;
 }
-@media screen and (min-width:1000px){
+@media screen and (min-width:1200px){
     #forkongithub{
         position:absolute;
         display:block;
@@ -176,6 +181,7 @@ circle.normal{
     #forkongithub a{
         width:200px;
         position:absolute;
+        margin-right: 0;
         top:60px;
         right:-60px;
         transform:rotate(45deg);
@@ -183,17 +189,31 @@ circle.normal{
         -ms-transform:rotate(45deg);
         -moz-transform:rotate(45deg);
         -o-transform:rotate(45deg);
-        box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+        box-shadow:4px 4px 10px rgba(0,0,0,0.2);
     }
 }
 
-
 .dropdown {
     position: relative;
+    justify-content: center;
 }
 
 .dropdown-button {
     cursor: pointer;
+    min-width: 140px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: center;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 }
 
 .caret {
@@ -265,16 +285,22 @@ circle.normal{
 }
 
 .flex-item-right {
-    width: 100%;
+    width: 120%;
     box-sizing: border-box;
+    margin-bottom: 50px;
 }
 
 .flex-item-right-bottom {
     width: 100%;
     box-sizing: border-box;
-    margin: 50px;
+    margin: 120px;
     justify-content: center;
-    transform: scale(1.2);
+    transform: scale(1.4);
+}
+
+img {
+    width: 100%;
+    height: auto;
 }
 
 @media (min-width: 850px) {
@@ -298,8 +324,11 @@ circle.normal{
         width: 55%;
         box-sizing: border-box;
         margin: 0;
-        margin-left: 60px;
         margin-top: 10px;
-        transform: scale(1.1);
+        transform: scale(1.15);
+    }
+
+    body {
+        margin-top: 150px;
     }
 }

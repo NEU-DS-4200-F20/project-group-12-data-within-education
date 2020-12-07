@@ -28,6 +28,9 @@
     <list default="true" id="f9314c7a-8e10-4dae-94aa-a42ad00ff8eb" name="Default Changelist" comment="Merge branch 'gh-pages' of https://github.com/NEU-DS-4200-F20/project-group-12-data-within-education into gh-pages&#10;&#10;# Conflicts:&#10;#&#9;index.html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video/Adobe Premiere Pro Auto-Save/Demo Video.prproj" beforeDir="false" afterPath="$PROJECT_DIR$/video/Adobe Premiere Pro Auto-Save/Demo Video.prproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/video/Demo Video.prproj" beforeDir="false" afterPath="$PROJECT_DIR$/video/Demo Video.prproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +74,7 @@
       <updated>1606261336339</updated>
       <workItem from="1606261337384" duration="6185000" />
       <workItem from="1607243933866" duration="2706000" />
+      <workItem from="1607309712140" duration="1266000" />
     </task>
     <servers />
   </component>

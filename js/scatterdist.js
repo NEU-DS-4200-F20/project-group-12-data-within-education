@@ -34,7 +34,8 @@ function scatterplot() {
 
 
         //For timespent it is only applicable for quiz and offline quiz
-        data = data.filter(function(d){return d.assignType === "quiz" || d.assignType === "offline-quiz"} )
+        data = data.filter(function(d){return (d.assignType === "quiz" ) || d.assignType === "offline-quiz"})
+        data = data.filter(function(d) { return d.timespent !== 0})
 
         let svg = d3.select(selector)
             .append('svg')
